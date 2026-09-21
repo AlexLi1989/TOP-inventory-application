@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Search icon</title>
+  <desc id="desc">A simple navy magnifying glass icon for a search bar.</desc>
+  <circle cx="28" cy="28" r="17" fill="none" stroke="#132238" stroke-width="6"/>
+  <path d="m41 41 14 14" fill="none" stroke="#132238" stroke-width="6" stroke-linecap="round"/>
+</svg>

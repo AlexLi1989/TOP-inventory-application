@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Board game dice logo</title>
+  <desc id="desc">A clean isometric six-sided die icon with coral, gold, and navy faces on a transparent background.</desc>
+  <defs>
+    <linearGradient id="front" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff6b5f"/>
+      <stop offset="1" stop-color="#e84d4d"/>
+    </linearGradient>
+    <linearGradient id="side" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f5b942"/>
+      <stop offset="1" stop-color="#df8e25"/>
+    </linearGradient>
+    <linearGradient id="top" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff0c2"/>
+      <stop offset="1" stop-color="#ffd56a"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%">
+      <feDropShadow dx="0" dy="14" stdDeviation="12" flood-color="#132238" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#shadow)" stroke="#132238" stroke-width="12" stroke-linejoin="round" stroke-linecap="round">
+    <!-- top face -->
+    <path d="M256 48 438 151 256 255 74 151Z" fill="url(#top)"/>
+    <!-- left/front face -->
+    <path d="M74 151 256 255v209L74 360Z" fill="url(#front)"/>
+    <!-- right/side face -->
+    <path d="M438 151 256 255v209l182-104Z" fill="url(#side)"/>
+  </g>
+
+  <!-- top face: three pips -->
+  <g fill="#132238">
+    <circle cx="188" cy="112" r="15"/>
+    <circle cx="256" cy="151" r="15"/>
+    <circle cx="324" cy="190" r="15"/>
+  </g>
+
+  <!-- front face: four pips -->
+  <g fill="#fff7e3">
+    <circle cx="137" cy="250" r="17"/>
+    <circle cx="210" cy="292" r="17"/>
+    <circle cx="137" cy="333" r="17"/>
+    <circle cx="210" cy="375" r="17"/>
+  </g>
+
+  <!-- side face: two pips -->
+  <g fill="#132238">
+    <circle cx="365" cy="292" r="17"/>
+    <circle cx="365" cy="375" r="17"/>
+  </g>
+
+  <!-- small highlight for a friendly, polished mark -->
+  <path d="M112 167 238 239" fill="none" stroke="#fff" stroke-width="7" opacity="0.34" stroke-linecap="round"/>
+</svg>
