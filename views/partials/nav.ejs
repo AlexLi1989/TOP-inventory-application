@@ -3,6 +3,10 @@
     <img src="/assets/logo.svg" alt="logo" />
     <a href="/">Board Gamania</a>
   </div>
+  <div class="nav-links">
+    <a href="/search">All Products</a>
+    <a href="/categories">All Categories</a>
+  </div>
   <div class="search-bar-container">
     <form action="/search" method="get">
       <input type="text" name="productName" placeholder="Search here" value="<%= locals.LASTPARAMS?.productName || "" %>" />

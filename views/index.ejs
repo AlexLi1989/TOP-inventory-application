@@ -1,13 +1,20 @@
-https://res.cloudinary.com/diksoiqmo/image/upload/v1790050508/hero.png
-
 <!DOCTYPE html>
 <html lang="en">
   <%- include("partials/head") %>
   <body>
     <%- include("partials/nav") %>
     <main>
-      <h1>500 Internal Server Error</h1>
-      <p>Something went wrong on our server. Please try again later.</p>
+      <div class="hero">
+        <h1>Welcome to Board Gamania</h1>
+        <p>Your ultimate destination for discovering and managing fantastic board games!</p>
+      </div>
+      <div class="all-products">
+        <a href="/search"><h2>All Products</h2></a>
+      </div>
+      <div class="all-categories">
+        <a href="/categories"><h2>All Categories</h2></a>
+      </div>
     </main>
+    <%- include("partials/footer") %>
   </body>
 </html>
