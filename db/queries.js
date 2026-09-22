@@ -5,7 +5,8 @@ async function searchInventory(queryParams) {
   const { category, productName, sortBy, order } = queryParams;
 
   //base sql query
-  let sql = "SELECT * FROM inventory";
+  let sql =
+    "SELECT inventory.*,categories.category_name FROM inventory JOIN categories ON inventory.category_id = categories.category_id";
   let queryValues = [];
   let filterValues = [];
   let sqlOrder = "";
@@ -19,7 +20,7 @@ async function searchInventory(queryParams) {
   //params contain one or more category
   if (category) {
     queryValues.push(category);
-    filterValues.push(`category = ANY($${queryValues.length})`);
+    filterValues.push(`categories.category_name = ANY($${queryValues.length})`);
   }
   //joining one or both query to base sql
   if (filterValues.length > 0) {
@@ -43,6 +44,13 @@ async function searchInventory(queryParams) {
   return rows;
 }
 
+async function getAllCategories() {
+  const { rows } = await pool.query(
+    "SELECT * FROM categories ORDER BY category_name",
+  );
+  return rows;
+}
+
 async function insertInventory() {}
 
 async function updateInventory() {}
@@ -53,6 +61,7 @@ async function deleteInventory(productId) {
 
 module.exports = {
   searchInventory,
+  getAllCategories,
   insertInventory,
   updateInventory,
   deleteInventory,

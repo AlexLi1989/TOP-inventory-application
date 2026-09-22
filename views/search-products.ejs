@@ -9,73 +9,23 @@
         <input type="hidden" name="productName" value="<%= locals.LASTPARAMS?.productName || "" %>" />
         <fieldset class="category filter">
           <legend>Category (multiple allowed) :</legend>
-          <div>
-          <% let isStrategyChecked = false;
-              if (locals.LASTPARAMS?.category) {
-                if (Array.isArray(LASTPARAMS.category)) {
-                  isStrategyChecked = LASTPARAMS.category.includes('Strategy');
-                  } else {
-                    isStrategyChecked = LASTPARAMS.category === 'Strategy';
+          <% for (let category of CATEGORIES) { %>
+            <div class="category">
+              <% let isChecked = false;
+                if (locals.LASTPARAMS?.category) {
+                  if (Array.isArray(LASTPARAMS.category)) {
+                    isChecked = LASTPARAMS.category.includes(category.category_name);
+                    } else {
+                      isChecked = LASTPARAMS.category === (category.category_name);
+                      }
                     }
-                  }
-          %>
-            <input type="checkbox" id="strategy" name="category" value="Strategy" <%= isStrategyChecked ? "checked" : "" %> />
-            <label for="strategy">Strategy</label>
-          </div>
-          <div>
-          <% let isPartyChecked = false;
-              if (locals.LASTPARAMS?.category) {
-                if (Array.isArray(LASTPARAMS.category)) {
-                  isPartyChecked = LASTPARAMS.category.includes('Party & Social');
-                  } else {
-                    isPartyChecked = LASTPARAMS.category === 'Party & Social';
-                    }
-                  }
-          %>
-            <input type="checkbox" id="party & social" name="category" value="Party & Social" <%= isPartyChecked ? "checked" : "" %> />
-            <label for="party & social">Party & Social</label>
-          </div>
-          <div>
-          <% let isCooperativeChecked = false;
-              if (locals.LASTPARAMS?.category) {
-                if (Array.isArray(LASTPARAMS.category)) {
-                  isCooperativeChecked = LASTPARAMS.category.includes('Cooperative');
-                  } else {
-                    isCooperativeChecked = LASTPARAMS.category === 'Cooperative';
-                    }
-                  }
-          %>
-            <input type="checkbox" id="cooperative" name="category" value="Cooperative" <%= isCooperativeChecked ? "checked" : "" %> />
-            <label for="cooperative">Cooperative</label>
-          </div>
-          <div>
-          <% let isFamilyChecked = false;
-              if (locals.LASTPARAMS?.category) {
-                if (Array.isArray(LASTPARAMS.category)) {
-                  isFamilyChecked = LASTPARAMS.category.includes('Family & Kids');
-                  } else {
-                    isFamilyChecked = LASTPARAMS.category === 'Family & Kids';
-                    }
-                  }
-          %>
-            <input type="checkbox" id="family & kids" name="category" value="Family & Kids" <%= isFamilyChecked ? "checked" : "" %> />
-            <label for="family & kids">Family & Kids</label>
-          </div>
-          <div>
-          <% let isThematicChecked = false;
-              if (locals.LASTPARAMS?.category) {
-                if (Array.isArray(LASTPARAMS.category)) {
-                  isThematicChecked = LASTPARAMS.category.includes('Thematic & Immersive');
-                  } else {
-                    isThematicChecked = LASTPARAMS.category === 'Thematic & Immersive';
-                    }
-                  }
-          %>
-            <input type="checkbox" id="thematic & immersive" name="category" value="Thematic & Immersive" <%= isThematicChecked ? "checked" : "" %> />
-            <label for="thematic & immersive">Thematic & Immersive</label>
-          </div>
+              %>
+              <input type="checkbox" id="<%= category.category_id%>" name="category" value="<%= category.category_name%>" <%= isChecked ? "checked" : "" %> />
+              <label for="<%= category.category_id%>"><%= category.category_name%></label>
+            </div>
+          <% } %>
         </fieldset>
-        <fieldset>
+        <fieldset class="sort filter">
           <legend>Sort By :</legend>
           <div>
             <input type="radio" id="price" name="sortBy" value="price"
@@ -90,7 +40,7 @@
             <label for="alpha">Alphabetical</label>
           </div>
         </fieldset>
-        <fieldset>
+        <fieldset class="order filter">
           <legend>Order By :</legend>
           <div>
             <input type="radio" id="asc" name="order" value="asc"
@@ -114,6 +64,7 @@
           <div class="product-card">
             <img src="<%= product.product_image_url %>" alt="<%= product.product_name %>"/>
             <h2><%= product.product_name %></h2>
+            <p>Category: <%= product.category_name %></p>
             <p>$ <%= product.price %></p>
             <p>Stock: <%= product.quantity %></p>
             <p>Description: <%= product.description %> </p>

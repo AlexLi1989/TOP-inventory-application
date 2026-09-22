@@ -1,6 +1,10 @@
 # TOP-inventory-application
 
-This project is a backend practice for building a board game store inventory app. Just a simple design with 3 pages: home, individual product and results page that caters to different queries.
+This project is a backend practice for building a board game store inventory app.
+Index should contain hero and two links to all products page and all categories page.
+All products page should contain a list of all products, a filter sidebar and function to add new product.
+All categories page should contain a list of all categories and a function to add new category.
+Finally a product page for displaying info of a single product, and it should allow for editing and deleting the product.
 
 ## Tech Stack & Ecosystem
 
