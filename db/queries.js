@@ -1,32 +1,59 @@
 const pool = require("./pool");
 
-async function getAllMessages() {
-  const { rows } = await pool.query("SELECT * FROM messages");
+//product search
+async function searchInventory(queryParams) {
+  const { category, productName, sortBy, order } = queryParams;
+
+  //base sql query
+  let sql = "SELECT * FROM inventory";
+  let queryValues = [];
+  let filterValues = [];
+  let sqlOrder = "";
+  let direction = "";
+
+  //params contain name case
+  if (productName) {
+    queryValues.push(`%${productName}%`);
+    filterValues.push(`product_name ILIKE $${queryValues.length}`);
+  }
+  //params contain one or more category
+  if (category) {
+    queryValues.push(category);
+    filterValues.push(`category = ANY($${queryValues.length})`);
+  }
+  //joining one or both query to base sql
+  if (filterValues.length > 0) {
+    sql += " WHERE " + filterValues.join(" AND ");
+  }
+  //sorting
+  if (sortBy) {
+    if (sortBy == "price") {
+      sqlOrder = " ORDER by price";
+    } else if (sortBy == "alpha") {
+      sqlOrder = " ORDER by product_name";
+    }
+  }
+  //ordering direction
+  if (sortBy && order) {
+    direction = order == "desc" ? " DESC" : " ASC";
+    sqlOrder += direction;
+  }
+  sql += sqlOrder;
+  const { rows } = await pool.query(sql, queryValues);
   return rows;
 }
 
-async function insertUserMessage(name, message, added) {
-  await pool.query(
-    "INSERT INTO messages (name, message, added) VALUES ($1,$2,$3)",
-    [name, message, added],
-  );
-}
+async function insertInventory() {}
 
-async function getUserMessage(messageId) {
-  const { rows } = await pool.query(
-    "SELECT * FROM messages WHERE messages.id = $1",
-    [messageId],
-  );
-  return rows[0];
-}
+async function updateInventory() {}
 
-async function deleteUserMessage(messageId) {
-  await pool.query("DELETE FROM messages WHERE messages.id = $1", [messageId]);
+async function deleteInventory(productId) {
+  await pool.query("DELETE FROM inventory WHERE product_id = $1", [productId]);
 }
 
 module.exports = {
-  getAllMessages,
-  getUserMessage,
-  insertUserMessage,
-  deleteUserMessage,
+  searchInventory,
+  insertInventory,
+  updateInventory,
+  deleteInventory,
 };

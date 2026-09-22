@@ -5,7 +5,7 @@
   </div>
   <div class="search-bar-container">
     <form action="/search" method="get">
-      <input type="text" name="productName" placeholder="Search here" />
+      <input type="text" name="productName" placeholder="Search here" value="<%= locals.LASTPARAMS?.productName || "" %>" />
       <button type="submit"><img src="/assets/search-icon.svg" alt="search-icon" /></button>
     </form>
   </div>
