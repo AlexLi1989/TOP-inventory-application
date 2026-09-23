@@ -13,3 +13,5 @@ Finally a product page for displaying info of a single product, and it should al
 - **Database:** PostgreSQL (via `pg` driver)
 - **Data Validation:** `express-validator` (v7.3.2)
 - **Configuration:** `dotenv` (v18.0.1)
+- **File Uploads:** `multer` (v1.4.5-lts.1)
+- **Cloud Storage:** `cloudinary` (v2.5.1)
