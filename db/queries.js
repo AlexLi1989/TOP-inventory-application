@@ -51,6 +51,27 @@ async function getAllCategories() {
   return rows;
 }
 
+async function findCategory(categoryName) {
+  const name = categoryName.category_name;
+  const { rows } = await pool.query(
+    "SELECT * from categories WHERE category_name = $1",
+    [name],
+  );
+  return rows[0];
+}
+
+async function insertCategory(categoryName) {
+  await pool.query("INSERT INTO categories (category_name) VALUES ($1)", [
+    categoryName,
+  ]);
+}
+
+async function deleteCategory(categoryId) {
+  await pool.query("DELETE FROM categories WHERE category_id = $1", [
+    categoryId,
+  ]);
+}
+
 async function insertInventory() {}
 
 async function updateInventory() {}
@@ -62,6 +83,9 @@ async function deleteInventory(productId) {
 module.exports = {
   searchInventory,
   getAllCategories,
+  findCategory,
+  insertCategory,
+  deleteCategory,
   insertInventory,
   updateInventory,
   deleteInventory,

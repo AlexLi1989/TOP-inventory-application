@@ -11,11 +11,13 @@ app.use(express.urlencoded({ extended: true }));
 //routers
 const indexRouter = require("./routes/indexRouter");
 const searchRouter = require("./routes/searchRouter");
+const categoryRouter = require("./routes/categoryRouter");
 const productRouter = require("./routes/productRouter.js");
 
 //routes
 app.use("/", indexRouter);
 app.use("/search", searchRouter);
+app.use("/categories", categoryRouter);
 app.use("/product", productRouter);
 
 //404 route
