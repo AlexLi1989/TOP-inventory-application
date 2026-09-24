@@ -71,12 +71,46 @@ async function deleteCategory(categoryId) {
     categoryId,
   ]);
 }
+async function getProduct(product_id) {
+  const { rows } = await pool.query(
+    "SELECT inventory.*, categories.category_name FROM inventory JOIN categories ON inventory.category_id = categories.category_id WHERE product_id = $1",
+    [product_id],
+  );
+  return rows[0];
+}
 
-async function insertInventory() {}
+async function insertProduct(product, imageUrl) {
+  const { product_name, price, quantity, category_id, description } = product;
+  await pool.query(
+    "INSERT INTO inventory (product_name,price,quantity,category_id,description,product_image_url) VALUES ($1, $2, $3, $4, $5, $6)",
+    [product_name, price, quantity, category_id, description, imageUrl],
+  );
+}
 
-async function updateInventory() {}
+async function editProduct(
+  product_name,
+  price,
+  quantity,
+  category_id,
+  description,
+  finalImageUrl,
+  product_id,
+) {
+  await pool.query(
+    "UPDATE inventory SET product_name = $1, price = $2, quantity = $3, category_id = $4, description = $5, product_image_url = $6 WHERE product_id = $7",
+    [
+      product_name,
+      price,
+      quantity,
+      category_id,
+      description,
+      finalImageUrl,
+      product_id,
+    ],
+  );
+}
 
-async function deleteInventory(productId) {
+async function deleteProduct(productId) {
   await pool.query("DELETE FROM inventory WHERE product_id = $1", [productId]);
 }
 
@@ -86,7 +120,8 @@ module.exports = {
   findCategory,
   insertCategory,
   deleteCategory,
-  insertInventory,
-  updateInventory,
-  deleteInventory,
+  getProduct,
+  insertProduct,
+  editProduct,
+  deleteProduct,
 };

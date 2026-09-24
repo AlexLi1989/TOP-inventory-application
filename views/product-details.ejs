@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("partials/head") %>
+  <body>
+    <%- include("partials/nav") %>
+    <main>
+      <div class="product-details-container">
+        <img src="<%= PRODUCT.product_image_url %>" alt="<%= PRODUCT.product_name %>" />
+        <form action="/product/<%= PRODUCT.product_id %>" method="POST" enctype="multipart/form-data">
+
+          <input type="hidden" name="old_product_image_url" value="<%= PRODUCT.product_image_url %>" />
+
+          <div class="form-group">
+            <label for="product_name">Product Name: </label>
+            <input type="text" class="form-input" id="product_name" name="product_name" value="<%= locals.LASTPARAMS?.product_name || PRODUCT.product_name %>" placeholder="Enter product name here" required/>
+          </div>
+
+          <div class="form-group">
+            <label for="price">Price: </label>
+            <input type="number" class="form-input" id="price" name="price" value="<%= locals.LASTPARAMS?.price || PRODUCT.price  %>" placeholder="Enter price here" required/>
+          </div>
+
+          <div class="form-group">
+            <label for="quantity">Quantity: </label>
+            <input type="number" class="form-input" id="quantity" name="quantity" value="<%= locals.LASTPARAMS?.quantity || PRODUCT.quantity  %>" placeholder="Enter quantity here" required/>
+          </div>
+
+          <div class="form-group">
+            <label for="category_id">Choose a Category: </label>
+            <select id="category_id" name="category_id" class="form-select" required>
+              <% for (let category of CATEGORIES) {%>
+                <% let isSelected = (locals.LASTPARAMS?.category_id === category.category_id) || (PRODUCT.category_id === category.category_id) %>
+                <option value="<%= category.category_id %>" <%= isSelected ? "selected" : "" %>>
+                  <%= category.category_name %>
+                </option>
+                <% } %>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description: </label>
+            <textarea class="form-input" id="description" name="description" rows="4" cols="50" required><%= locals.LASTPARAMS?.description || PRODUCT.description %></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="product_image">Upload Image: </label>
+            <input type="file" id="product_image" name="product_image" accept="image/*" />
+          </div>
+
+          <button type="submit" class="edit-product-btn">Save Changes</button>
+        </form>
+      </div>
+      <div class="product-delete-container">
+        <form action="/product/<%= PRODUCT.product_id %>/delete" method="POST">
+          <button type="submit" class="product-delete-btn" onclick="return confirm('Are you sure you want to permanently delete <%= PRODUCT.product_name %> from the inventory?')">
+            Delete This Product
+          </button>
+        </form>
+      </div>
+      <%- include("partials/errors") %>
+    </main>
+    <%- include("partials/footer") %>
+  </body>
+</html>

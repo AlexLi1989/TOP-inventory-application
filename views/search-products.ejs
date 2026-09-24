@@ -60,12 +60,7 @@
       </aside>
       <div class="search-products-title">
         <h1>Search Results</h1>
-        <button id="openBtn">Add Product</button>
-        <dialog id="productForm">
-          <h3></h3>
-          <p></p>
-          <button id="closeBtn">close</button>
-        </dialog>
+        <a href="/product/new" class="add-product-btn">Add New Product</a>
       </div>
       <div class="product-cards-container">
         <% for (let product of PRODUCTS) { %>
@@ -82,17 +77,5 @@
       </div>
     </main>
     <%- include("partials/footer") %>
-
-    <script>
-      const modal = document.getElementById('productForm');
-      const openBtn = document.getElementById('openBtn');
-      const closeBtn = document.getElementById('closeBtn');
-      openBtn.addEventListener('click', () => {
-        modal.showModal();
-      });
-      closeBtn.addEventListener('click', () => {
-        modal.close();
-      });
-    </script>
   </body>
 </html>

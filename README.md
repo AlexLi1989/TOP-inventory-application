@@ -2,7 +2,8 @@
 
 This project is a backend practice for building a board game store inventory app.
 Index should contain hero and two links to all products page and all categories page.
-All products page should contain a list of all products, a filter sidebar and function to add new product.
+All products page should contain a list of all products, a filter sidebar and a link to add new product page.
+Add Product Page's add new product form should come with a multipart function to handle image file upload via Multer and Cloudinary.
 All categories page should contain a list of all categories and a function to add new category.
 Finally a product page for displaying info of a single product, and it should allow for editing and deleting the product.
 
