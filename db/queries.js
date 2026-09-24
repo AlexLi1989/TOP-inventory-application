@@ -2,7 +2,11 @@ const pool = require("./pool");
 
 //product search
 async function searchInventory(queryParams) {
-  const { category, productName, sortBy, order } = queryParams;
+  let { category, productName, sortBy, order } = queryParams;
+
+  if (category && !Array.isArray(category)) {
+    category = [category];
+  }
 
   //base sql query
   let sql =
