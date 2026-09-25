@@ -12,7 +12,7 @@
 
           <div class="form-group">
             <label for="product_name">Product Name: </label>
-            <input type="text" class="form-input" id="product_name" name="product_name" value="<%= locals.LASTPARAMS?.product_name || PRODUCT.product_name %>" placeholder="Enter product name here" required/>
+            <input type="text" class="form-input" id="product_name" name="product_name" value="<%- locals.LASTPARAMS?.product_name || PRODUCT.product_name %>" placeholder="Enter product name here" required/>
           </div>
 
           <div class="form-group">
@@ -29,7 +29,7 @@
             <label for="category_id">Choose a Category: </label>
             <select id="category_id" name="category_id" class="form-select" required>
               <% for (let category of CATEGORIES) {%>
-                <% let isSelected = (locals.LASTPARAMS?.category_id === category.category_id) || (PRODUCT.category_id === category.category_id) %>
+                <% let isSelected = (locals.LASTPARAMS?.category_id = category.category_id) || (PRODUCT.category_id == category.category_id) %>
                 <option value="<%= category.category_id %>" <%= isSelected ? "selected" : "" %>>
                   <%= category.category_name %>
                 </option>

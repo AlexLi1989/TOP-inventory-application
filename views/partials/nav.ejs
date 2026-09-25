@@ -1,6 +1,6 @@
 <nav>
   <div class="logo-container">
-    <img src="/assets/logo.svg" alt="logo" />
+    <a href="/"><img src="/assets/logo.svg" alt="logo" /></a>
     <a href="/">Board Gamania</a>
   </div>
   <div class="nav-links">
@@ -9,7 +9,7 @@
   </div>
   <div class="search-bar-container">
     <form action="/search" method="get">
-      <input type="text" name="productName" placeholder="Search here" value="<%= locals.LASTPARAMS?.productName || "" %>" />
+      <input type="text" name="productName" placeholder="Search here" value="<%- locals.LASTPARAMS?.productName || '' %>" />
       <button type="submit"><img src="/assets/search-icon.svg" alt="search-icon" /></button>
     </form>
   </div>

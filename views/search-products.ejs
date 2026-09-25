@@ -6,7 +6,7 @@
     <main>
       <aside>
       <form action="/search" method="GET">
-        <input type="hidden" name="productName" value="<%= locals.LASTPARAMS?.productName || "" %>" />
+        <input type="hidden" name="productName" value="<%- locals.LASTPARAMS?.productName || '' %>" />
         <fieldset class="category filter">
           <legend>Category (multiple allowed) :</legend>
           <% for (let category of CATEGORIES) { %>
@@ -16,11 +16,11 @@
                   if (Array.isArray(LASTPARAMS.category)) {
                     isChecked = LASTPARAMS.category.includes(category.category_name);
                     } else {
-                      isChecked = LASTPARAMS.category === (category.category_name);
+                      isChecked = LASTPARAMS.category == (category.category_name);
                       }
                     }
               %>
-              <input type="checkbox" id="<%= category.category_id%>" name="category" value="<%= category.category_name%>" <%= isChecked ? "checked" : "" %> />
+              <input type="checkbox" id="<%= category.category_id%>" name="category" value="<%- category.category_name%>" <%= isChecked ? "checked" : "" %> />
               <label for="<%= category.category_id%>"><%= category.category_name%></label>
             </div>
           <% } %>

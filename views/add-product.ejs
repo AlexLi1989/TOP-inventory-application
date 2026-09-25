@@ -10,24 +10,24 @@
 
           <div class="form-group">
             <label for="product_name">Product Name: </label>
-            <input type="text" class="form-input" id="product_name" name="product_name" value="<%= locals.LASTPARAMS?.product_name || "" %>" placeholder="Enter product name here" required/>
+            <input type="text" class="form-input" id="product_name" name="product_name" value="<%- locals.LASTPARAMS?.product_name || '' %>" placeholder="Enter product name here" required/>
           </div>
 
           <div class="form-group">
             <label for="price">Price: </label>
-            <input type="number" class="form-input" id="price" name="price" value="<%= locals.LASTPARAMS?.price || "" %>" placeholder="Enter price here" required/>
+            <input type="number" class="form-input" id="price" name="price" value="<%= locals.LASTPARAMS?.price || '' %>" placeholder="Enter price here" required/>
           </div>
 
           <div class="form-group">
             <label for="quantity">Quantity: </label>
-            <input type="number" class="form-input" id="quantity" name="quantity" value="<%= locals.LASTPARAMS?.quantity || "" %>" placeholder="Enter quantity here" required/>
+            <input type="number" class="form-input" id="quantity" name="quantity" value="<%= locals.LASTPARAMS?.quantity || '' %>" placeholder="Enter quantity here" required/>
           </div>
 
           <div class="form-group">
             <label for="category_id">Choose a Category: </label>
             <select id="category_id" name="category_id" class="form-select" required>
               <% for (let category of CATEGORIES) {%>
-                <% let isSelected = locals.LASTPARAMS?.category_id === category.category_id; %>
+                <% let isSelected = locals.LASTPARAMS?.category_id == category.category_id; %>
                 <option value="<%= category.category_id %>" <%= isSelected ? "selected" : "" %>>
                   <%= category.category_name %>
                 </option>
@@ -37,7 +37,7 @@
 
           <div class="form-group">
             <label for="description">Description: </label>
-            <textarea class="form-input" id="description" name="description" rows="4" cols="50" placeholder="Enter description here" required><%= locals.LASTPARAMS?.description || "" %></textarea>
+            <textarea class="form-input" id="description" name="description" rows="4" cols="50" placeholder="Enter description here" required><%- locals.LASTPARAMS?.description || '' %></textarea>
           </div>
 
           <div class="form-group">

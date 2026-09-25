@@ -13,7 +13,11 @@ productRouter.post(
   productController.productCreatePost,
 );
 productRouter.get("/:id", productController.productEditGet);
-productRouter.post("/:id", productController.productEditPost);
+productRouter.post(
+  "/:id",
+  upload.single("product_image"),
+  productController.productEditPost,
+);
 productRouter.post("/:id/delete", productController.productDeletePost);
 
 module.exports = productRouter;

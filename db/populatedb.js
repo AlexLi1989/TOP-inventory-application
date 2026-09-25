@@ -38,7 +38,7 @@ VALUES
     5,
     1,
     'A classic game of gathering resources and trading to build settlements on the island of Catan.',
-    'https://res.cloudinary.com/diksoiqmo/image/upload/v1789963197/catan.webp'
+    'https://res.cloudinary.com/diksoiqmo/image/upload/v1790299819/board_gamania_products/catan.webp'
   ),
   (
     'The Resistance: Avalon',
@@ -46,7 +46,7 @@ VALUES
     3,
     2,
     'A game of social deduction where players try to unmask Arthur''s loyal knights or Mordred''s minions.',
-    'https://res.cloudinary.com/diksoiqmo/image/upload/v1789963198/The_Resistance__Avalon.webp'
+    'https://res.cloudinary.com/diksoiqmo/image/upload/v1790299823/board_gamania_products/The_Resistance__Avalon.webp'
   ),
   (
     'Pandemic',
@@ -54,7 +54,7 @@ VALUES
     6,
     3,
     'Four diseases have broken out in the world and it is up to a team of specialists to find cures.',
-    'https://res.cloudinary.com/diksoiqmo/image/upload/v1789963198/pandemic.webp'
+    'https://res.cloudinary.com/diksoiqmo/image/upload/v1790299822/board_gamania_products/pandemic.webp'
   ),
   (
     'Ticket to Ride',
@@ -62,7 +62,7 @@ VALUES
     1,
     4,
     'A cross-country train adventure game where players collect train cards to claim railway routes.',
-    'https://res.cloudinary.com/diksoiqmo/image/upload/v1789963164/ticket_to_ride.webp'
+    'https://res.cloudinary.com/diksoiqmo/image/upload/v1790299824/board_gamania_products/ticket_to_ride.webp'
   ),
   (
     'Gloomhaven',
@@ -70,7 +70,7 @@ VALUES
     2,
     5,
     'A tactical combat game in a persistent world of shifting motives and evolving campaigns.',
-    'https://res.cloudinary.com/diksoiqmo/image/upload/v1789963198/gloomhaven.webp'
+    'https://res.cloudinary.com/diksoiqmo/image/upload/v1790299821/board_gamania_products/gloomhaven.webp'
   );
 `;
 

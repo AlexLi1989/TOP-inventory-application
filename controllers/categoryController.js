@@ -9,14 +9,14 @@ const validateCategory = [
     .trim()
     .isLength({ min: 3, max: 50 })
     .withMessage(lengthErr)
+    .escape()
     .custom(async (value) => {
       const category = await db.findCategory({ category_name: value });
       if (category) {
         throw new Error(uniqueErr);
       }
       return true;
-    })
-    .escape(),
+    }),
 ];
 
 async function categorySearchGet(req, res, next) {
@@ -41,7 +41,8 @@ const categoryCreatePost = [
         return res.status(400).render("categories", {
           TITLE: "All Categories",
           CATEGORIES: categories,
-          errors: errors.array(),
+          ERRORS: errors.array(),
+          LASTPARAMS: req.body,
         });
       }
       const { category_name } = matchedData(req);
@@ -65,7 +66,7 @@ async function categoryDeletePost(req, res, next) {
         return res.status(400).render("categories", {
           TITLE: "All Categories",
           CATEGORIES: categories,
-          errors: [{ msg: "Cannot delete category that is still in use" }],
+          ERRORS: [{ msg: "Cannot delete category that is still in use" }],
         });
       } catch (dbError) {
         next(dbError);

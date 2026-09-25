@@ -114,8 +114,8 @@ async function editProduct(
   );
 }
 
-async function deleteProduct(productId) {
-  await pool.query("DELETE FROM inventory WHERE product_id = $1", [productId]);
+async function deleteProduct(product_id) {
+  await pool.query("DELETE FROM inventory WHERE product_id = $1", [product_id]);
 }
 
 module.exports = {
