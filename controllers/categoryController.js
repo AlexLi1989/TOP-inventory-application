@@ -56,6 +56,15 @@ const categoryCreatePost = [
 
 async function categoryDeletePost(req, res, next) {
   try {
+    const { admin_password } = req.body;
+    if (admin_password !== process.env.ADMIN_SECRET_PASSWORD) {
+      const categories = await db.getAllCategories();
+      return res.status(403).render("categories", {
+        TITLE: "All Categories",
+        CATEGORIES: categories,
+        ERRORS: [{ msg: "Invalid password." }],
+      });
+    }
     await db.deleteCategory(req.params.id);
     res.redirect("/categories");
   } catch (error) {

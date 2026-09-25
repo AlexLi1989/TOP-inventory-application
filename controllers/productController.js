@@ -1,5 +1,6 @@
 const db = require("../db/queries");
 const { body, validationResult, matchedData } = require("express-validator");
+const fs = require("fs");
 
 //cloudinary module and config
 const cloudinary = require("cloudinary").v2;
@@ -48,6 +49,9 @@ const productCreatePost = [
       const errors = validationResult(req);
       const categories = await db.getAllCategories();
       if (!errors.isEmpty()) {
+        if (req.file) {
+          fs.unlink(req.file.path, () => {});
+        }
         return res.status(400).render("add-product", {
           TITLE: "Add New Product",
           CATEGORIES: categories,
@@ -61,11 +65,15 @@ const productCreatePost = [
           folder: "board_gamania_products",
         });
         imageUrl = uploadResult.secure_url;
+        fs.unlink(req.file.path, () => {});
       }
       const product = matchedData(req);
       await db.insertProduct(product, imageUrl);
       res.redirect("/search");
     } catch (error) {
+      if (req.file) {
+        fs.unlink(req.file.path, () => {});
+      }
       next(error);
     }
   },
@@ -89,9 +97,29 @@ const productEditPost = [
     try {
       const errors = validationResult(req);
       const product_id = req.params.id;
+      const categories = await db.getAllCategories();
+      const product = await db.getProduct(product_id);
+      const { admin_password } = req.body;
+      const isPasswordValid =
+        admin_password === process.env.ADMIN_SECRET_PASSWORD;
+      //check for 403 valid password first
+      if (!isPasswordValid) {
+        //clear local file storage
+        if (req.file) {
+          fs.unlink(req.file.path, () => {});
+        }
+        return res.status(403).render("product-details", {
+          TITLE: "Product Details",
+          PRODUCT: product,
+          CATEGORIES: categories,
+          ERRORS: [{ msg: "Invalid password." }],
+          LASTPARAMS: req.body,
+        });
+      }
       if (!errors.isEmpty()) {
-        const categories = await db.getAllCategories();
-        const product = await db.getProduct(product_id);
+        if (req.file) {
+          fs.unlink(req.file.path, () => {});
+        }
         return res.status(400).render("product-details", {
           TITLE: "Product Details",
           PRODUCT: product,
@@ -113,6 +141,7 @@ const productEditPost = [
           folder: "board_gamania_products",
         });
         finalImageUrl = uploadResult.secure_url;
+        fs.unlink(req.file.path, () => {});
         await deleteCloudinaryImage(old_product_image_url);
       }
 
@@ -127,6 +156,9 @@ const productEditPost = [
       );
       res.redirect(`/product/${product_id}`);
     } catch (error) {
+      if (req.file) {
+        fs.unlink(req.file.path, () => {});
+      }
       next(error);
     }
   },
@@ -134,9 +166,20 @@ const productEditPost = [
 async function productDeletePost(req, res, next) {
   try {
     const product_id = req.params.id;
+    const { admin_password } = req.body;
     const product = await db.getProduct(product_id);
     if (!product) {
       return res.redirect("/search");
+    }
+    if (admin_password !== process.env.ADMIN_SECRET_PASSWORD) {
+      const categories = await db.getAllCategories();
+      return res.status(403).render("product-details", {
+        TITLE: "Product Details",
+        PRODUCT: product,
+        CATEGORIES: categories,
+        ERRORS: [{ msg: "Invalid password." }],
+        LASTPARAMS: req.body,
+      });
     }
     const imageUrl = product.product_image_url;
     await deleteCloudinaryImage(imageUrl); //delete external resources first before database data

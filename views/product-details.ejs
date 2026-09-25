@@ -6,7 +6,7 @@
     <main>
       <div class="product-details-container">
         <img src="<%= PRODUCT.product_image_url %>" alt="<%= PRODUCT.product_name %>" />
-        <form action="/product/<%= PRODUCT.product_id %>" method="POST" enctype="multipart/form-data">
+        <form action="/product/<%= PRODUCT.product_id %>" method="POST" enctype="multipart/form-data" onsubmit="return handleAdminConfirm(this,'Are you sure you want to save these changes?')" >
 
           <input type="hidden" name="old_product_image_url" value="<%= PRODUCT.product_image_url %>" />
 
@@ -29,7 +29,7 @@
             <label for="category_id">Choose a Category: </label>
             <select id="category_id" name="category_id" class="form-select" required>
               <% for (let category of CATEGORIES) {%>
-                <% let isSelected = (locals.LASTPARAMS?.category_id = category.category_id) || (PRODUCT.category_id == category.category_id) %>
+                <% let isSelected = (locals.LASTPARAMS?.category_id == category.category_id) || (PRODUCT.category_id == category.category_id) %>
                 <option value="<%= category.category_id %>" <%= isSelected ? "selected" : "" %>>
                   <%= category.category_name %>
                 </option>
@@ -39,7 +39,7 @@
 
           <div class="form-group">
             <label for="description">Description: </label>
-            <textarea class="form-input" id="description" name="description" rows="4" cols="50" required><%= locals.LASTPARAMS?.description || PRODUCT.description %></textarea>
+            <textarea class="form-input" id="description" name="description" rows="4" cols="50" required><%- locals.LASTPARAMS?.description || PRODUCT.description %></textarea>
           </div>
 
           <div class="form-group">
@@ -51,8 +51,8 @@
         </form>
       </div>
       <div class="product-delete-container">
-        <form action="/product/<%= PRODUCT.product_id %>/delete" method="POST">
-          <button type="submit" class="product-delete-btn" onclick="return confirm('Are you sure you want to permanently delete <%= PRODUCT.product_name %> from the inventory?')">
+        <form action="/product/<%= PRODUCT.product_id %>/delete" method="POST" onsubmit="return handleAdminConfirm(this, 'Are you sure you want to permanently delete <%= PRODUCT.product_name %> from the inventory?')">
+          <button type="submit" class="product-delete-btn">
             Delete This Product
           </button>
         </form>
@@ -60,5 +60,7 @@
       <%- include("partials/errors") %>
     </main>
     <%- include("partials/footer") %>
+    <script src="/js/handle-admin-confirm.js" defer>
+    </script>
   </body>
 </html>

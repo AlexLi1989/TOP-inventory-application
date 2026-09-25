@@ -23,8 +23,8 @@
               <h2>
                 <a href="/search?productName=&category=<%= encodeURIComponent(category.category_name) %>"><%- category.category_name %></a>
               </h2>
-              <form action="/categories/<%= category.category_id %>/delete" method="POST">
-                <button type="submit" class="btn-delete" onclick="return confirm('Are you sure you want to delete this category?')">Delete</button>
+              <form action="/categories/<%= category.category_id %>/delete" method="POST" onsubmit="return handleAdminConfirm(this,'Are you sure you want to delete this category?')">
+                <button type="submit" class="btn-delete" >Delete</button>
               </form>
             </li>
             <% } %>
@@ -34,5 +34,7 @@
       </div>
     </main>
     <%- include("partials/footer") %>
+    <script src="/js/handle-admin-confirm.js" defer>
+    </script>
   </body>
 </html>
