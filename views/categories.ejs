@@ -10,7 +10,7 @@
           <h1>All Categories</h1>
           <form action="/categories" method="POST">
             <label for="category_name" class="form-label">Create New Category: </label>
-            <input type="text" name="category_name" placeholder="Enter category name" value="<%- locals.LASTPARAMS?.category_name || '' %>" required />
+            <input type="text" name="category_name" placeholder="Enter category name" value="<%- locals.LASTPARAMS?.category_name || '' %>" required class="category-input" />
             <button type="submit">Add</button>
           </form>
           <%- include("partials/errors") %>

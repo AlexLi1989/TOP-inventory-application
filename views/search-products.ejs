@@ -3,7 +3,7 @@
   <%- include("partials/head") %>
   <body>
     <%- include("partials/nav") %>
-    <main>
+    <main class="page-search">
       <aside>
       <form action="/search" method="GET">
         <input type="hidden" name="productName" value="<%- locals.LASTPARAMS?.productName || '' %>" />
